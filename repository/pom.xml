@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>tms</artifactId>
+        <groupId>org.cognizant.tms</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <artifactId>repository</artifactId>
+    <packaging>jar</packaging>
+    <name>Tms - Repository</name>
+    <description>Module that contains all repositories to be used in the project. Depends of Model Module.</description>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.cognizant.tms</groupId>
+            <artifactId>model</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
+
+</project>

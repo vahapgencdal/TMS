@@ -1,0 +1,17 @@
+
+`
+java:S4488&"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(²‘·
+e
+java:S4488]"HReplace "@RequestMapping(method = RequestMethod.PUT)" with "@PutMapping"(Õç¼ñ8Üİ¢§ˆ/
+e
+java:S4488@"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(ğÄâÿ8Ï’ß¥ˆ/
+°
+java:S4449g"Annotate the parameter with @javax.annotation.Nullable in method 'created' declaration, or make sure that null can not be passed as argument.(Õµæœúÿÿÿÿ8Üİ¢§ˆ/
+k
+java:S4488M"NReplace "@RequestMapping(method = RequestMethod.DELETE)" with "@DeleteMapping"(•“ÛÏ8àŞ§ˆ/
+H
+java:S1452P"&Remove usage of generic wildcard type.(õüîØÿÿÿÿÿ8üÜË§ˆ/
+°
+java:S4449/"Annotate the parameter with @javax.annotation.Nullable in method 'created' declaration, or make sure that null can not be passed as argument.(Õµæœúÿÿÿÿ8ıŠ¹¦ˆ/
+j
+java:S44882"HReplace "@RequestMapping(method = RequestMethod.GET)" with "@GetMapping"(–û‚ùÿÿÿÿ8Ï’ß¥ˆ/
