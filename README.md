@@ -13,5 +13,5 @@ http://localhost:8080/swagger-ui/#/
 All the services can be test with swagger-ui.
 
 
-## if you localhost:8080 you will access frontend
+## if you got localhost:8080 you will access frontend
 
