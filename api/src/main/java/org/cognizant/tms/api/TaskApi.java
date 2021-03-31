@@ -87,9 +87,9 @@ public class TaskApi {
             taskService.save(tmsTask);
             return new ResponseEntity<>("Task added", HttpStatus.OK);
         } catch (ExistingTaskNameException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.BAD_REQUEST);
         } catch (TaskNotFoundException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>("Unable edit task", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -119,9 +119,9 @@ public class TaskApi {
 
             return new ResponseEntity<>("Task edited", HttpStatus.OK);
         } catch (TaskNotFoundException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.NO_CONTENT);
         } catch (SubTasksNotFinishedException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }catch (Exception e) {
             return new ResponseEntity<>("Unable edit task", HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -137,7 +137,7 @@ public class TaskApi {
             taskService.delete(id);
             return new ResponseEntity<>("Task removed", HttpStatus.OK);
         } catch (TaskNotFoundException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(e.getLocalizedMessage(), HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>("Unable delete task", HttpStatus.INTERNAL_SERVER_ERROR);
         }

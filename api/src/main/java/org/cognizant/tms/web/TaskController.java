@@ -7,8 +7,11 @@ import org.cognizant.tms.model.TmsTask;
 import org.cognizant.tms.request.TaskPostRequest;
 import org.cognizant.tms.service.api.TaskService;
 import org.cognizant.tms.service.exception.ExistingTaskNameException;
+import org.cognizant.tms.service.exception.SubTasksNotFinishedException;
 import org.cognizant.tms.service.exception.TaskNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -58,6 +61,9 @@ public class TaskController {
     public String postUSer(@Valid @ModelAttribute TaskPostRequest taskPostRequest, BindingResult result, Model model) {
         String error="";
         if (result.hasErrors()) {
+            model.addAttribute("taskGroupList", Arrays.asList(TaskGroup.values()));
+            model.addAttribute("taskStatusList",Arrays.asList(TaskStatus.values()));
+            model.addAttribute("taskList", taskService.findAll());
             return ADD_USER;
         }
 
@@ -73,7 +79,7 @@ public class TaskController {
 
             taskService.save(tmsTask);
         } catch (ExistingTaskNameException | TaskNotFoundException e) {
-            error=e.getMessage();
+            error=e.getLocalizedMessage();
         } catch (Exception e) {
            error="Unable to add task";
         }
@@ -101,6 +107,9 @@ public class TaskController {
                            @PathVariable @Positive(message = "Task Id have to be positive number") long id) {
         String error="";
         if (result.hasErrors()) {
+            model.addAttribute("taskGroupList", Arrays.asList(TaskGroup.values()));
+            model.addAttribute("taskStatusList",Arrays.asList(TaskStatus.values()));
+            model.addAttribute("taskList", taskService.findAll());
             return ADD_USER;
         }
 
@@ -120,8 +129,8 @@ public class TaskController {
             task.setTaskGroup(TaskGroup.valueOf(taskPostRequest.getTaskGroup()));
 
             taskService.update(task);
-        } catch (ExistingTaskNameException | TaskNotFoundException e) {
-            error=e.getMessage();
+        } catch (ExistingTaskNameException | TaskNotFoundException | SubTasksNotFinishedException e) {
+            error=e.getLocalizedMessage();
         } catch (Exception e) {
             error="Unable to edit task";
         }
@@ -140,7 +149,7 @@ public class TaskController {
         try {
             taskService.delete(id);
         } catch (TaskNotFoundException e) {
-            error=e.getMessage();
+            error=e.getLocalizedMessage();
         } catch (Exception e) {
             error="Unable delete task";
         }
