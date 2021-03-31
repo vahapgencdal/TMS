@@ -1,5 +1,6 @@
 package org.cognizant.tms.service.impl;
 
+import org.cognizant.tms.model.TaskGroup;
 import org.cognizant.tms.model.TaskStatus;
 import org.cognizant.tms.model.TmsTask;
 import org.cognizant.tms.service.exception.SubTasksNotFinishedException;
@@ -35,7 +36,7 @@ public class TaskServiceImpl  implements TaskService {
 
     @Override
     public List<TmsTask> findByGroupName(String groupName) {
-        return taskRepository.findByTaskGroup(groupName);
+        return taskRepository.findByTaskGroup(TaskGroup.valueOf(groupName));
     }
 
     @Override
@@ -44,18 +45,18 @@ public class TaskServiceImpl  implements TaskService {
     }
 
     @Override
-    public void save(TmsTask tmsTask) {
-        taskRepository.save(tmsTask);
+    public TmsTask save(TmsTask tmsTask) {
+        return taskRepository.save(tmsTask);
     }
 
     @Override
-    public void update(TmsTask tmsTask) throws SubTasksNotFinishedException {
+    public TmsTask update(TmsTask tmsTask) throws SubTasksNotFinishedException {
         List<TmsTask> childList = taskRepository.findsSubTmsTasksById(tmsTask.getId());
         if(tmsTask.getTaskStatus().equals(TaskStatus.DONE) &&
             !childList.stream().allMatch(tsk->tsk.getTaskStatus().equals(TaskStatus.DONE))){
             throw new SubTasksNotFinishedException("Sub Tasks have to be in DONE status for change parent status to DONE");
         }
-        taskRepository.save(tmsTask);
+        return taskRepository.save(tmsTask);
     }
 
     @Override

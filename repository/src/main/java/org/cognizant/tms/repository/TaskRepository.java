@@ -1,5 +1,6 @@
 package org.cognizant.tms.repository;
 
+import org.cognizant.tms.model.TaskGroup;
 import org.cognizant.tms.model.TmsTask;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -16,7 +17,7 @@ import java.util.List;
  */
 @Repository
 public interface TaskRepository extends JpaRepository<TmsTask, Long>, JpaSpecificationExecutor<TmsTask> {
-    List<TmsTask> findByTaskGroup(String name);
+    List<TmsTask> findByTaskGroup(TaskGroup name);
 
     TmsTask findByName(String name);
 

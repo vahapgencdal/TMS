@@ -15,7 +15,7 @@ public interface TaskService {
     List<TmsTask> findsSubTmsTasksById(Long id);
     List<TmsTask> findByGroupName(String groupName);
     TmsTask findByName(String name);
-    void save(TmsTask tmsTask) throws SubTasksNotFinishedException;
-    void update(TmsTask tmsTask) throws SubTasksNotFinishedException;
+    TmsTask save(TmsTask tmsTask) throws SubTasksNotFinishedException;
+    TmsTask update(TmsTask tmsTask) throws SubTasksNotFinishedException;
     void delete(long id) throws TaskNotFoundException;
 }
