@@ -1,1 +1,88 @@
-asd
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TMS - Save Task</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div class="col-md-6">
+        <div th:if="${error!=null&&error!=''}" class="alert alert-danger" role="alert" th:text="${error}"></div>
+        <div class="row">
+            <h2 style="padding-top:20px">Please Add or Edit Task.</h2>
+            <form th:action="@{${taskPostRequest.id}<=0?'/add':'/edit/'+${taskPostRequest.id}}"
+                  th:object="${taskPostRequest}" method="post" class="form">
+                <input type="hidden" th:field="*{id}">
+                <div class="form-group" th:fragment="taskPostRequest">
+                    <label for="name">Name</label>
+                    <input class="form-control" type="text" th:field="*{name}" id="name" placeholder="Name">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="parentId">Parent Task</label>
+                    <select class="form-control" th:field="*{parentId}" id="parentId">
+                        <option value="0">Select</option>
+                        <option th:each="task: ${taskList}"  th:utext="${task.name}"
+                                th:selected="${taskPostRequest.parentId}"
+                                th:value="${task.id}">
+                        </option>
+                    </select>
+
+
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('parentId')}" th:errors="*{parentId}"></div>
+                </div>
+
+                <div class="form-group" th:fragment="taskPostRequest">
+                    <label for="assignee">Assignee</label>
+                    <input class="form-control" type="text" th:field="*{assignee}" id="assignee" placeholder="Assignee">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('assignee')}" th:errors="*{assignee}"></div>
+                </div>
+
+                <div class="form-group" th:fragment="taskPostRequest">
+                    <label for="timeSpent">Time Spent</label>
+                    <input class="form-control" type="number" th:field="*{timeSpent}" id="timeSpent" placeholder="Time Spent">
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('timeSpent')}" th:errors="*{timeSpent}"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="taskGroup">Task Group</label>
+                    <select class="form-control" th:field="*{taskGroup}" id="taskGroup">
+                        <option th:each="taskGroup: ${taskGroupList}"  th:utext="${taskGroup}"
+                                th:selected="${taskPostRequest.taskGroup}"
+                                th:value="${taskGroup}">
+                        </option>
+                    </select>
+
+
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('taskGroup')}" th:errors="*{taskGroup}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="taskStatus">Task Status</label>
+                    <select class="form-control" th:field="*{taskStatus}" id="taskStatus">
+                        <option th:each="taskStatus: ${taskStatusList}"  th:utext="${taskStatus}"
+                                th:selected="${taskPostRequest.taskStatus}"
+                                th:value="${taskStatus}">
+                        </option>
+                    </select>
+
+
+                    <div class="alert alert-warning" th:if="${#fields.hasErrors('taskStatus')}" th:errors="*{taskStatus}"></div>
+                </div>
+                <input type="submit" th:disabled="${action=='view'}"  class="btn btn-success" value="Save">
+                <input style="padding-left:20px" onclick="goBack()" type="button" class="btn btn-primary" value="Back">
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    function goBack() {
+      window.history.back();
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+</body>
+</html>

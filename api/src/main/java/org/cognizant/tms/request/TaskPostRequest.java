@@ -1,6 +1,7 @@
 package org.cognizant.tms.request;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -24,6 +25,9 @@ import javax.validation.constraints.Size;
 @Data
 @NoArgsConstructor
 public class TaskPostRequest {
+
+    @JsonIgnore
+    private long id;
 
     @ApiModelProperty(notes = "Task name is mandatory attribute. have to be at least 3 and maximum 255 characters")
     @Size(min = 3,max = 255, message = "Size of Task Name must be between 3 and 255")
@@ -53,6 +57,7 @@ public class TaskPostRequest {
 
     public static TaskPostRequest toRequest(TmsTask entity) {
         TaskPostRequest tpr = new TaskPostRequest();
+        tpr.setId(entity.getId());
         tpr.setName(entity.getName());
         tpr.setTaskStatus(entity.getTaskStatus().name());
         tpr.setTimeSpent(entity.getTimeSpent());

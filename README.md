@@ -4,7 +4,7 @@ Task management system (TMS)
 ## H2 Console
 if you want to access h2 database goto web page with below url   
 http://localhost:8080/h2-console   
-change JDBC url like "jdbc:h2:mem:fuel_consumption" and after that connect. 
+change JDBC url like "jdbc:h2:mem:task_assignments" and after that connect. 
 
 
 ##Spring Fox

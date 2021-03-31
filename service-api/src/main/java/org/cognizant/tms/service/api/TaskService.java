@@ -12,6 +12,7 @@ import java.util.Optional;
 public interface TaskService {
     Optional<TmsTask> findById(long id);
     List<TmsTask> findAll();
+    List<TmsTask> findsSubTmsTasksById(Long id);
     List<TmsTask> findByGroupName(String groupName);
     TmsTask findByName(String name);
     void save(TmsTask tmsTask) throws SubTasksNotFinishedException;

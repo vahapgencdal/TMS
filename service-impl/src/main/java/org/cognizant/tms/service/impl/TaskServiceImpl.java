@@ -29,6 +29,10 @@ public class TaskServiceImpl  implements TaskService {
         return taskRepository.findAll();
     }
 
+    public List<TmsTask> findsSubTmsTasksById(Long id){
+        return taskRepository.findsSubTmsTasksById(id);
+    }
+
     @Override
     public List<TmsTask> findByGroupName(String groupName) {
         return taskRepository.findByTaskGroup(groupName);
@@ -48,8 +52,7 @@ public class TaskServiceImpl  implements TaskService {
     public void update(TmsTask tmsTask) throws SubTasksNotFinishedException {
         List<TmsTask> childList = taskRepository.findsSubTmsTasksById(tmsTask.getId());
         if(tmsTask.getTaskStatus().equals(TaskStatus.DONE) &&
-                childList.stream()
-                        .anyMatch(tmsTask1 -> tmsTask1.getTaskStatus().equals(TaskStatus.OPEN))){
+            !childList.stream().allMatch(tsk->tsk.getTaskStatus().equals(TaskStatus.DONE))){
             throw new SubTasksNotFinishedException("Sub Tasks have to be in DONE status for change parent status to DONE");
         }
         taskRepository.save(tmsTask);
