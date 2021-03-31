@@ -5,9 +5,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.cognizant.tms.tms.model.TmsTask;
-import org.cognizant.tms.tms.model.TaskGroup;
-import org.cognizant.tms.tms.model.TaskStatus;
+import org.cognizant.tms.model.TmsTask;
+import org.cognizant.tms.model.TaskGroup;
+import org.cognizant.tms.model.TaskStatus;
 import org.cognizant.tms.validator.ValueOfEnum;
 
 import javax.validation.constraints.NotNull;
@@ -43,7 +43,7 @@ public class TaskPostRequest {
     @Size(min = 3,max = 255, message = "Size of Assignee must be between 3 and 255")
     private String assignee;
 
-    @ApiModelProperty(notes = "Task Group is mandatory attribute, have to be specified type. Task Status: TEST, DEVOPS, DEVELOPMENT,ANALYST")
+    @ApiModelProperty(notes = "Task Group is mandatory attribute, have to be specified type. Task Group: TEST, DEVOPS, DEVELOPMENT,ANALYST")
     @NotNull
     @ValueOfEnum(enumClass = TaskGroup.class, message = "Must be specified types. TEST, DEVOPS, DEVELOPMENT,ANALYST")
     private String taskGroup;

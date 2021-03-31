@@ -1,4 +1,4 @@
-package org.cognizant.tms.tms.model;
+package org.cognizant.tms.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -38,12 +39,12 @@ public class TmsTask {
     @Column(name = "TASK_GROUP", nullable = false)
     private TaskGroup taskGroup;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "PARENT_ID", referencedColumnName = "id")
     private TmsTask parent;
 
     @OneToMany(mappedBy = "parent", fetch = FetchType.LAZY)
-    private Set<TmsTask> subTmsTasks;
+    private List<TmsTask> subTmsTasks;
 
     @Column(name = "CREATED_AT")
     private LocalDateTime createdAt;
